@@ -52,6 +52,3 @@ Foram utilizadas todas as tecnologias aprendidas no curso, criando a página de 
 ## Contato
 
 #### [Leandro Mello](https://www.linkedin.com/in/leandro-mello-47a24823b/)
-
-
-.
