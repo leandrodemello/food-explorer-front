@@ -82,8 +82,3 @@ Ex.:    Local: http://localhost:3333/
 ## Contato
 
 #### [Leandro Mello](https://www.linkedin.com/in/leandro-mello-47a24823b/)
-<<<<<<< HEAD
-
-.
-=======
->>>>>>> 7e68ef5f05356454a4c9cdc27a52b8505b54505c
