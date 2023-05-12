@@ -1,22 +1,14 @@
 ## Food Explorer - Desafio Final (Front-End)
 
-O Food Explorer é uma aplicação desenvolvida como projeto final da trilha Explorer da Rocketseat.
-Foram utilizadas todas as tecnologias aprendidas no curso, criando a página de um restaurante fictício utilizando o conceito  de layout responsivo.
+Neste desafio, foi desenvolvido o food explorer, um menu interativo para um restaurante fictício.
+Construir uma aplicação de ponta a ponta com front-end e back-end, utilizando as teconologias aprendidas no Explorer, simulando um restaurante. 
+Uma aplicação completa que vai desde a visualização de um prato até o pagamento do mesmo, bem como a versão mobile do projeto.
 
+O food explorer terá dois perfils: o admin e o usuário;
 
-## Deploy
+O admin é a pessoa responsável pelo restaurante, logo, pode criar, visualizar, editar e apagar um prato a qualquer momento. Cada prato contem uma imagem, um nome, uma categoria, uma breve descrição, os ingredientes e o seu preço. Ao clicar em adicionar prato, o admin recebe uma mensagem de sucesso e é redirecionado para a página principal;
 
-- Site:  https://
-
-
-## Back-End
-
-- Site: https://
-
-
-## Administrador: 
-- Email: admin@email.com
-- Senha: 123456
+O usuário, após fazer o cadastro, irá visualizar todos os pratos cadastrados e, quando clica em um prato, é redirecionado para uma nova tela com informações mais detalhadas sobre ele.
 
 
 ## Características
@@ -35,6 +27,44 @@ Foram utilizadas todas as tecnologias aprendidas no curso, criando a página de 
 - Aplicado o conceito de Inversão de dependência na API do usuário.
 
 
+## Deploy
+
+- Site:  https://
+
+
+## Back-End
+
+- Site: https://
+
+
+## Administrador: 
+- Email: admin@email.com
+- Senha: 123456
+
+
+## Instruções para a execução do projeto:
+
+#### Front-end
+
+git clone https://github.com/leandrodemello/food-explorer-front
+
+
+#### Back-end
+
+git clone https://
+
+#### Acessar a pasta e instalar as dependências
+
+npm install
+
+#### Iniciar o servidor local (back-end / front-end)
+
+npm run dev
+
+#### Acessar o endereço fornecido pelo terminal via Browser
+
+Ex.:    Local: http://localhost:3333/
+
 ## Imagens
 
 ![página1](https://user-images.githubusercontent.com/118762335/235221680-9b3f9f7e-b189-48b3-9d34-491084ec5507.png)
@@ -52,6 +82,5 @@ Foram utilizadas todas as tecnologias aprendidas no curso, criando a página de 
 ## Contato
 
 #### [Leandro Mello](https://www.linkedin.com/in/leandro-mello-47a24823b/)
-
 
 .
