@@ -34,7 +34,7 @@ O usuário, após fazer o cadastro, irá visualizar todos os pratos cadastrados 
 
 ## Back-End
 
-- Site: https://
+- Site: https://github.com/leandrodemello/food-explorer-back
 
 
 ## Administrador: 
@@ -51,17 +51,17 @@ git clone https://github.com/leandrodemello/food-explorer-front
 
 #### Back-end
 
-git clone https://
+git clone https://github.com/leandrodemello/food-explorer-back
 
-#### Acessar a pasta e instalar as dependências
+#### Acessar a pasta e instalar as dependências:
 
 npm install
 
-#### Iniciar o servidor local (back-end / front-end)
+#### Iniciar o servidor local: (back-end / front-end)
 
 npm run dev
 
-#### Acessar o endereço fornecido pelo terminal via Browser
+#### Acessar o endereço fornecido pelo terminal via Browser:
 
 Ex.:    Local: http://localhost:3333/
 
