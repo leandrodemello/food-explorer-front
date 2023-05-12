@@ -1,0 +1,241 @@
+import { useAuth } from "../../hooks/auth";
+import { Container, Form } from "./styles";
+
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { ButtonUpload } from "../../components/ButtonUpload";
+import { ButtonBack } from "../../components/ButtonBack";
+import { InputLabel } from "../../components/InputLabel";
+import { NoteItem } from "../../components/NoteItem";
+import { TextArea } from "../../components/TextArea";
+import { Button } from "../../components/Button";
+import { Select } from "../../components/Select";
+import { Navbar } from "../../components/NavBar";
+import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
+
+import { FiUpload} from "react-icons/fi";
+
+import { api } from "../../services/api";
+
+export function EditMeal() {
+  const { user } = useAuth();
+  const isAdmin = user.admin;
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const [ meal, setMeal ] = useState("");
+  const [ price, setPrice ] = useState(meal.price);
+  const [ title, setTitle ] = useState(meal.title);
+  const [ category, setCategory] = useState(meal.category);
+  const [ newIngredient, setNewIngredient ] = useState("");
+  const [ ingredients, setIngredients ] = useState(meal.ingredients);
+  const [ description, setDescription ] = useState(meal.description);
+  
+  const [ image, setImage ] = useState(meal.image);
+  const [ imageFile, setImageFile ] = useState(null);
+
+  function handleAddIngredient() {
+    setIngredients(prevState => [...prevState, newIngredient])
+    setNewIngredient("")
+  };
+
+  function handleRemoveIngredient(deleted) {
+    setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted))
+  };
+
+  function handleMealImage(event) {
+    const file = event.target.files[0]
+      setImageFile(file)
+      const imagePreview = URL.createObjectURL(file)
+      setImage(imagePreview)
+  };
+
+  async function deleteMeal() {
+    var deleteMeal = confirm("Realmente deseja excluir este prato?")
+    if( deleteMeal === true) {
+      await api.delete(`/meals/${params.id}`)
+      alert("O prato foi excluído com sucesso!")
+      navigate(-1)
+    } else {
+      alert("Você não excluiu o prato.")
+      navigate(-1)
+    }
+  };
+
+  async function handleUpdateMeal() {
+
+    if (!title) {
+      return alert("Preencha o nome do prato.")
+    }
+
+    if (!category) {
+      return alert("Selecione uma categoria.")
+    }
+
+    if (!ingredients) {
+      return alert("adicione os ingredientes do prato")
+    } 
+
+     if (newIngredient) {
+      return alert("Você deixou um ingrediente preenchido sem adicionar, clique (+) para adicionar ou remova o mesmo para continuar.")
+    }
+
+    const formData = new FormData()
+
+    formData.append("title", title)
+    formData.append("category", category)
+    formData.append("description", description)
+    formData.append("price", price)
+    ingredients.map(ingredient => formData.append("ingredients", ingredient))
+
+    try {
+      if (imageFile == null) {
+        await api.put(`/meals/${params.id}`, formData)
+        alert("Prato atualizado com sucesso!")
+      } else {
+        formData.append("image", imageFile)
+        await api.put(`/meals/${params.id}`, formData)
+        await api.patch(`/meals/${params.id}`, formData)
+        alert("Prato atualizado com sucesso!")
+      }
+    } catch (error) {
+      if (error.message) {
+          alert(error.response.data.message)
+        } else {
+          alert("Não foi possível atualizar o prato")
+        }
+      }
+   
+  }
+
+  useEffect(() => {
+    async function fetchEditMeal() {
+      try {
+        const response = await api.get(`/meals/${params.id}`)
+        setMeal(response.data)
+        const { title, category, description, price, ingredients, image } = response.data;
+        setTitle(title)
+        setCategory(category)
+        setDescription(description)
+        setPrice(price)
+        setImage(image)
+        setIngredients(ingredients.map(ingredient => ingredient.name))
+      } catch (error) {
+        alert("Não foi possível buscar as informações")
+      }
+    }
+    fetchEditMeal();
+  }, []);
+
+  return (
+
+    <Container>
+
+      <Navbar/>
+      <Header/> 
+        { isAdmin === 1 ?
+            <main>
+                <ButtonBack
+                  to="/"
+                  id="buttonBack"
+                  title="Voltar"
+                />
+
+                <h2>Editar prato</h2>
+
+              <Form>
+                <div className="form1">
+                  <ButtonUpload 
+                    type="button"
+                    label="Imagem do prato" 
+                    icon={FiUpload} 
+                    title="Selecione imagem para alterá-la" 
+                    onChange={handleMealImage} 
+                  />
+                  <InputLabel 
+                    type="text"
+                    label="Nome" 
+                    placeholder="Ex.: Salada Ceasar"
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}                  
+                  />
+                  <Select 
+                    type="text"
+                    label="Categoria" 
+                    placeholder="Selecione uma categoria" 
+                    value={category}
+                    onChange={e => setCategory(e.target.value)}                  
+                  />
+                </div>
+
+                <div className="form2">
+                  <div className="dish">
+                      <label htmlFor="noteItem">Ingredientes</label>
+                        <div className="ingredients">                     
+                            {
+                              meal.ingredients && 
+                                ingredients.map((ingredient, index) => (
+                                    <NoteItem className="ingredientsInMeal"
+                                      key={String(index)}
+                                      value={ingredient}
+                                      onClick={() => handleRemoveIngredient(ingredient)}
+                                    />   
+                                ))
+                            }
+
+                              <NoteItem className="newIngredients"
+                                isNew
+                                placeholder="ingrediente"  
+                                value={newIngredient}
+                                onChange={e => setNewIngredient(e.target.value)}
+                                onClick={() => handleAddIngredient()}
+                              />                                                
+                        </div>
+                  </div>
+                    <InputLabel 
+                      type="text"
+                      id="price" 
+                      label="Preço" 
+                      placeholder="R$ 00,00"
+                      value={price}              
+                      onChange={e => setPrice(e.target.value)}
+                    />
+                </div>
+
+                <div className="description">
+                  <label htmlFor="textArea">Descrição</label>
+                  <TextArea
+                    rows="100"
+                    placeholder="Salada é uma opção refrescante para o verão"
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                  />
+                </div>
+
+                <div className="buttons">
+                  <Button 
+                    type="button"
+                    title="Excluir prato" 
+                    onClick={() => deleteMeal()}
+                  />
+                  <Button 
+                    type="button"
+                    title="Salvar alterações" 
+                    onClick={() => handleUpdateMeal()}
+                  />
+                </div>
+              </Form>
+
+            </main>     
+
+        : <strong>Acesso Negado</strong>
+      }   
+      <Footer/>
+
+    </Container>
+  )
+};
+
