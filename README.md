@@ -29,7 +29,7 @@ O usuário, após fazer o cadastro, irá visualizar todos os pratos cadastrados 
 
 ## Deploy
 
-- Site:  https://
+- Site:  https://foodexplorermcz.netlify.app/
 
 
 ## Back-End
