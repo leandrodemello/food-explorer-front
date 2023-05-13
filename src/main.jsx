@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import theme from './Styles/theme';
-import GlobalStyles from "./Styles/global";
+import theme from './styles/theme';
+import GlobalStyles from "./styles/global";
 import { ThemeProvider } from 'styled-components';
 
 import { Routes } from "./routes";
