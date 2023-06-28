@@ -80,5 +80,11 @@ Ex.:    Local: http://localhost:3333/
 
 
 ## Contato
+Se você quiser entrar em contato comigo para oportunidades de trabalho, colaborações ou apenas para dizer olá, sinta-se à vontade para me contatar por meio dos seguintes canais:
 
-#### [Leandro Mello](https://www.linkedin.com/in/leandro-mello-47a24823b/)
+Email: leandro.devmcz@gmail.com </br>
+Portfólio: https://leandromello.dev/ </br>
+GitHub: https://github.com/leandrodemello </br>
+Linkedin: https://www.linkedin.com/in/leandro-mello-47a24823b/
+
+Obrigado pela visita e aproveite a exploração dos projetos!
